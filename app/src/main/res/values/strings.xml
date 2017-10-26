@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="dialog_title">Quantidade utilizada:</string>
+    <string name="cancel">Cancelar</string>
+    <string name="clean">Limpar</string>
+    <string name="ok">OK</string>
+</resources>
