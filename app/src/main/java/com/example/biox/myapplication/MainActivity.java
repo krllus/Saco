@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     TextView btnLaunch;
+    SacoCustomView sacoCustomView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,32 +23,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnLaunch = findViewById(R.id.txt_launch);
-        btnLaunch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchDialod();
-            }
-        });
+        btnLaunch.setOnClickListener(v -> launchDialod());
 
-        int size = 200;
-        double percentage = 1 - 0.3;
-
-        Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        Paint paint = new Paint();
-
-        //fill the canvas with white
-        paint.setColor(Color.WHITE);
-        paint.setStyle(Paint.Style.FILL);
-        canvas.drawPaint(paint);
-
-        // draw a rectangle over the canvas
-        Rect rect = new Rect(size, size, 0, (int) (size * percentage));
-        paint.setColor(getResources().getColor(R.color.colorAccent));
-        canvas.drawRect(rect, paint);
-
-        ImageView imageView = findViewById(R.id.imageView);
-        imageView.setImageBitmap(bitmap);
+        sacoCustomView = findViewById(R.id.sacoView);
+        sacoCustomView.setFilledPercentage(0.4);
     }
 
 

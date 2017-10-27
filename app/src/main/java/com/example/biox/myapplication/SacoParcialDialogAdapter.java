@@ -38,7 +38,7 @@ public class SacoParcialDialogAdapter extends RecyclerView.Adapter<SacoParcialVi
     @Override
     public SacoParcialViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate
-                (R.layout.row_saco_parcial, parent, false);
+                (R.layout.custom_view_saco_parcial, parent, false);
 
         return new SacoParcialViewHolder(view);
     }
@@ -55,9 +55,15 @@ public class SacoParcialDialogAdapter extends RecyclerView.Adapter<SacoParcialVi
         //TODO create click event here
     }
 
+    @Override
+    public void onViewRecycled(SacoParcialViewHolder holder) {
+        super.onViewRecycled(holder);
+        //clear image
+        holder.imgFill.setImageDrawable(null);
+    }
+
     private void fillContent(final SacoParcialViewHolder holder, SacoParcial element) {
         holder.txtNome.setText(element.getNome());
-
         setColorToImage(holder.imgFill, element.getMultiplier());
     }
 

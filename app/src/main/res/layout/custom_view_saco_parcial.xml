@@ -2,27 +2,33 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="128dp"
+    android:layout_height="wrap_content"
+    android:gravity="center"
     android:padding="4dp">
 
     <ImageView
-        android:id="@+id/saco_parcial_imagem_fill"
+        android:id="@+id/saco_imagem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:adjustViewBounds="true"
         android:alpha=".40"
+        android:scaleType="fitCenter"
         android:src="@drawable/bag_frame" />
 
     <TextView
         android:id="@+id/saco_parcial_nome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical|center_horizontal"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:gravity="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="asdf asdf asdf asdf" />
+        tools:text="teste" />
 </FrameLayout>

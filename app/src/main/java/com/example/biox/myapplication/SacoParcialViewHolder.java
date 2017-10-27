@@ -13,7 +13,7 @@ class SacoParcialViewHolder extends RecyclerView.ViewHolder {
 
     SacoParcialViewHolder(View itemView) {
         super(itemView);
-        imgFill = itemView.findViewById(R.id.saco_parcial_imagem_fill);
+        imgFill = itemView.findViewById(R.id.saco_imagem);
         txtNome = itemView.findViewById(R.id.saco_parcial_nome);
     }
 }
