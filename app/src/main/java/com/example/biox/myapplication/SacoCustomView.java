@@ -14,6 +14,7 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 
 public class SacoCustomView extends android.support.v7.widget.AppCompatImageView {
     private static final String LOG_TAG = SacoCustomView.class.getSimpleName();
@@ -28,8 +29,6 @@ public class SacoCustomView extends android.support.v7.widget.AppCompatImageView
     private Rect rect;
 
     private Double filledPercentage;
-
-    private static final int CANVAS_SIZE = 512;
 
     public SacoCustomView(@NonNull Context context) {
         this(context, null);
@@ -55,22 +54,20 @@ public class SacoCustomView extends android.support.v7.widget.AppCompatImageView
         }
 
         filledPercentage = 0.0;
+
         maskBitmap = BitmapFactory.decodeResource(getResources(), maskResId);
-        resultBitmap = getResizedBitmap(maskBitmap, CANVAS_SIZE, CANVAS_SIZE);
         //resultBitmap = Bitmap.createBitmap(maskBitmap.getWidth(), maskBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 
         setUpWhitePaint();
-        setUpRectanglePaint(context);
+        setUpRectanglePaint();
         setUpMaskPaint();
-
-        setUpRectangleDimensions();
 
         array.recycle();
     }
 
     public void setFilledPercentage(double filledPercentage) {
-        this.filledPercentage = filledPercentage;
-        setUpRectangleDimensions();
+        //TODO insure that filled percentage is between 0~1
+        this.filledPercentage = 1 - filledPercentage;
         invalidate();
     }
 
@@ -80,9 +77,9 @@ public class SacoCustomView extends android.support.v7.widget.AppCompatImageView
         paintWhite.setStyle(Paint.Style.FILL);
     }
 
-    private void setUpRectanglePaint(Context context) {
+    private void setUpRectanglePaint() {
         paintRectangle = new Paint();
-        paintRectangle.setColor(context.getResources().getColor(R.color.colorAccent));
+        paintRectangle.setColor(Color.MAGENTA);
         paintRectangle.setStyle(Paint.Style.FILL);
     }
 
@@ -91,21 +88,24 @@ public class SacoCustomView extends android.support.v7.widget.AppCompatImageView
         paintMask.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
     }
 
-    private void setUpRectangleDimensions() {
-        rect = new Rect(CANVAS_SIZE, CANVAS_SIZE, 0, (int) (CANVAS_SIZE * filledPercentage));
+    private void setUpRectangleDimensions(int width, int height) {
+        int padding = (int) (height * filledPercentage);
+        Log.d(LOG_TAG, "filled layout: " + padding);
+        rect = new Rect(0, padding, width, height);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         // fill canvas with white paint
         canvas.drawPaint(paintWhite);
 
         // create rectangle
+        setUpRectangleDimensions(canvas.getWidth(), canvas.getHeight());
         canvas.drawRect(rect, paintRectangle);
 
         //apply mask
+        resultBitmap = getResizedBitmap(maskBitmap, canvas.getWidth(), canvas.getHeight());
         canvas.drawBitmap(resultBitmap, 0, 0, paintMask);
     }
 
@@ -120,10 +120,8 @@ public class SacoCustomView extends android.support.v7.widget.AppCompatImageView
         matrix.postScale(scaleWidth, scaleHeight);
 
         // "RECREATE" THE NEW BITMAP
-        Bitmap resizedBitmap = Bitmap.createBitmap(
+        //bm.recycle();
+        return Bitmap.createBitmap(
                 bm, 0, 0, width, height, matrix, false);
-        bm.recycle();
-
-        return resizedBitmap;
     }
 }

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btnLaunch.setOnClickListener(v -> launchDialod());
 
         sacoCustomView = findViewById(R.id.sacoView);
-        sacoCustomView.setFilledPercentage(0.4);
+        sacoCustomView.setFilledPercentage(.25);
     }
 
 
