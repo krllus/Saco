@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 class SacoParcialViewHolder extends RecyclerView.ViewHolder {
 
-    ImageView imgFill;
+    SacoCustomView imgFill;
     TextView txtNome;
 
     SacoParcialViewHolder(View itemView) {

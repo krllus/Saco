@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+
     android:gravity="center"
     android:padding="4dp">
 
-    <ImageView
+    <com.example.biox.myapplication.SacoCustomView
         android:id="@+id/saco_imagem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        app:mask="@drawable/bag_mask" />
 
     <ImageView
         android:layout_width="match_parent"

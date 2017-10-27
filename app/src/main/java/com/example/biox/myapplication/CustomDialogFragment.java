@@ -44,7 +44,7 @@ public class CustomDialogFragment extends DialogFragment {
 
         elements.addAll(getListOfAllSacosParciais());
 
-        adapter = new SacoParcialDialogAdapter(getActivity(), elements);
+        adapter = new SacoParcialDialogAdapter(elements);
         recyclerView.setAdapter(adapter);
 
         builder
