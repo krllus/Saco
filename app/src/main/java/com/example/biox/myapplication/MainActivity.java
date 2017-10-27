@@ -1,40 +1,59 @@
 package com.example.biox.myapplication;
 
 import android.app.FragmentManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SacoParcialDialogListener {
 
-    TextView btnLaunch;
+    TextView txtLaunch;
     SacoCustomView sacoCustomView;
+
+    SacoParcial selectedSaco;
+    CustomDialogFragment dialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnLaunch = findViewById(R.id.txt_launch);
-        btnLaunch.setOnClickListener(v -> launchDialod());
+        selectedSaco = SacoParcial.SACO_VAZIO;
+
+        txtLaunch = findViewById(R.id.txt_launch);
+        txtLaunch.setOnClickListener(v -> launchDialod());
 
         sacoCustomView = findViewById(R.id.sacoView);
-        sacoCustomView.setFilledPercentage(0.25);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setCurrentSelectedSacoName();
+    }
+
+    private void setCurrentSelectedSacoName() {
+        txtLaunch.setText(selectedSaco.getNome());
+    }
 
     public void launchDialod() {
         FragmentManager fragmentManager = getFragmentManager();
-        CustomDialogFragment newFragment = new CustomDialogFragment();
+        dialogFragment = new CustomDialogFragment();
 
-        newFragment.show(fragmentManager, "tag");
+        dialogFragment.show(fragmentManager, "tag");
 
+    }
+
+    @Override
+    public void onDialogItemSelected(SacoParcial sacoParcial) {
+        this.selectedSaco = sacoParcial;
+        setCurrentSelectedSacoName();
+        dialogFragment.dismiss();
+    }
+
+    @Override
+    public void onDialogCleanSelected() {
+        this.selectedSaco = SacoParcial.SACO_VAZIO;
+        setCurrentSelectedSacoName();
     }
 }

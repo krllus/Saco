@@ -1,5 +1,7 @@
 package com.example.biox.myapplication;
 
+import android.app.Dialog;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +16,18 @@ import java.util.ArrayList;
  */
 public class SacoParcialDialogAdapter extends RecyclerView.Adapter<SacoParcialViewHolder> {
     private ArrayList<SacoParcial> elements;
+    private SacoParcialDialogListener sacoListner;
 
-    SacoParcialDialogAdapter(ArrayList<SacoParcial> elements) {
+
+    SacoParcialDialogAdapter(ArrayList<SacoParcial> elements, SacoParcialDialogListener listener) {
         this.elements = elements;
+        this.sacoListner = listener;
     }
 
     @Override
     public SacoParcialViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate
-                (R.layout.custom_view_saco_parcial, parent, false);
+                (R.layout.row_dialog_saco_partial, parent, false);
 
         return new SacoParcialViewHolder(view);
     }
@@ -36,7 +41,9 @@ public class SacoParcialDialogAdapter extends RecyclerView.Adapter<SacoParcialVi
     }
 
     private void setUpClickListener(final SacoParcialViewHolder holder, SacoParcial element) {
-        //TODO create click event here
+        holder.itemView.setOnClickListener(view -> {
+            sacoListner.onDialogItemSelected(element);
+        });
     }
 
     private void fillContent(final SacoParcialViewHolder holder, SacoParcial element) {
@@ -52,4 +59,6 @@ public class SacoParcialDialogAdapter extends RecyclerView.Adapter<SacoParcialVi
     public ArrayList<SacoParcial> getElements() {
         return this.elements;
     }
+
+
 }
