@@ -8,7 +8,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements SacoParcialDialogListener {
 
     TextView txtLaunch;
-    SacoCustomView sacoCustomView;
 
     SacoParcial selectedSaco;
     CustomDialogFragment dialogFragment;
@@ -22,8 +21,6 @@ public class MainActivity extends AppCompatActivity implements SacoParcialDialog
 
         txtLaunch = findViewById(R.id.txt_launch);
         txtLaunch.setOnClickListener(v -> launchDialod());
-
-        sacoCustomView = findViewById(R.id.sacoView);
     }
 
     @Override

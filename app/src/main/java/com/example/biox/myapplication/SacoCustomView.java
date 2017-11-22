@@ -14,7 +14,6 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 
 public class SacoCustomView extends android.support.v7.widget.AppCompatImageView {
     private Bitmap maskBitmap;
@@ -80,7 +79,7 @@ public class SacoCustomView extends android.support.v7.widget.AppCompatImageView
 
     private void setUpRectanglePaint() {
         paintRectangle = new Paint();
-        paintRectangle.setColor(Color.MAGENTA);
+        paintRectangle.setColor(getResources().getColor(R.color.color_palha));
         paintRectangle.setStyle(Paint.Style.FILL);
     }
 

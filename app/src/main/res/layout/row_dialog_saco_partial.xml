@@ -16,13 +16,14 @@
         android:scaleType="fitCenter"
         app:mask="@drawable/bag_mask" />
 
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:alpha=".40"
         android:scaleType="fitCenter"
         android:src="@drawable/bag_frame" />
+
 
     <TextView
         android:id="@+id/saco_parcial_nome"

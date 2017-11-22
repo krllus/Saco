@@ -3,7 +3,6 @@ package com.example.biox.myapplication;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
@@ -52,7 +51,7 @@ public class CustomDialogFragment extends DialogFragment {
                 .inflate(R.layout.dialogbrand_layout, null, false);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.dialog_recycler_view);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setHasFixedSize(true);
 
         elements.addAll(getListOfAllSacosParciais());
